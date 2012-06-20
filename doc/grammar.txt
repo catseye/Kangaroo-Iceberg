@@ -1,0 +1,17 @@
+KangarooIceberg	::= {TopLevelNode}.
+TopLevelNode	::= NodeName NodeLit.
+NodeLit		::= "{" {ArcDefn} ["/" RuleSets] "}".
+
+ArcDefn		::= NodeRef ":" WeightDefn.
+NodeRef		::= NodeLit | "^" NodeName | NodeName NodeLit.
+WeightDefn	::= <<literal integer>>.
+
+RuleSets	::= RuleSet {";" RuleSet}.
+RuleSet		::= Rule {"," Rule}.
+Rule		::= {ArcApp} "->" {ArcApp}.
+
+ArcApp		::= NodeApp ":" WeightApp.
+NodeApp		::= NodeRefn | Var<Node>.
+WieghtApp	::= WeightDefn | Var<Weight>.
+
+Var		::= "$" Name.
