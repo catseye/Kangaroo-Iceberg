@@ -53,7 +53,7 @@
 
 struct symbol_table	*gstab;	/* general symbol table */
 struct legislature	*glaw;	/* all rules */
-	
+
 /* PROTOTYPES */
 
 void			 usage(void);
@@ -64,39 +64,42 @@ int
 main(int argc, char **argv)
 {
 	struct scan_st *sc;
-	int ch;
 	int do_dump = 0;
 	struct node *global;
+	int argn;
+	char *global_ident;
 
 	/* Initialize / allocate globals. */
-	
+
 	gstab = symbol_table_new();
-	global = node_new(symbol_define(gstab, "__GLOBAL__", SYM_TYPE_NODE));
+	global_ident = malloc(20 * sizeof(char));
+	strcpy(global_ident, "__GLOBAL__");
+	global = node_new(symbol_define(gstab, global_ident, SYM_TYPE_NODE));
 	glaw = legislature_new();
 
 	/* Parse arguments. */
 
-	while ((ch = getopt(argc, argv, "d")) != -1) {
-		switch(ch) {
-		case 'd':
-			do_dump = 1;
+	for (argn = 1; argn < argc; argn++) {
+		if (argv[argn][0] == '-') {
+			switch(argv[argn][1]) {
+			case 'd':
+				do_dump = 1;
+				break;
+			default:
+				usage();
+			}
+		} else {
 			break;
-		case '?':
-		default:
-			usage();
 		}
 	}
-	argc -= optind;
-	argv += optind;
 	
 	/* Parse the input file. */
 
-	while (argc > 0) {
+	while (argn < argc) {
 		sc = scan_open(argv[0]);
 		kangaroo_iceberg(sc, global);
 		scan_close(sc);
-		argc--;
-		argv++;
+		argn++;
 	}
 
 	if (do_dump) {

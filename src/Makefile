@@ -1,11 +1,22 @@
-# BSD Makefile for kiceberg.
+# Makefile for kiceberg.
 # $Id$
 
-CC=	gcc
-CFLAGS=	-Wall -ansi -pedantic
-LIBS=	
+CC?=gcc
+LIBS?=
 
-CFLAGS+= ${EXTRA_CFLAGS}
+WARNS=	-Werror -W -Wall -Wstrict-prototypes -Wmissing-prototypes \
+	-Wpointer-arith	-Wno-uninitialized -Wreturn-type -Wcast-qual \
+	-Wwrite-strings -Wswitch -Wshadow -Wcast-align -Wchar-subscripts \
+	-Winline -Wnested-externs -Wredundant-decls
+
+# Won't compile under ANSI, but for consistency with other Makefiles:
+ifdef ANSI
+  CFLAGS+= -ansi -pedantic
+else
+  CFLAGS+= -std=c99 -D_POSIX_C_SOURCE=200112L
+endif
+
+CFLAGS+= ${WARNS} ${EXTRA_CFLAGS}
 
 OBJS=	graph.o rule.o \
 	symbol.o \

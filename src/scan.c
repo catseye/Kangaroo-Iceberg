@@ -76,19 +76,19 @@ scan_close(struct scan_st *sc)
 }
 
 void
-scan_error(struct scan_st *sc, char *fmt, ...)
+scan_error(struct scan_st *sc, const char *fmt, ...)
 {
 	va_list args;
-	char err[256];
+	char error[256];
 
 	va_start(args, fmt);
-	vsnprintf(err, 255, fmt, args);
+	vsnprintf(error, 255, fmt, args);
 
 	fprintf(stderr, "Error (line %d, column %d, token '%s'): %s.\n",
-	    sc->lino, sc->columno, sc->token, err);
+	    sc->lino, sc->columno, sc->token, error);
 }
 
-int
+static int
 scan_char(struct scan_st *sc, char *x)
 {	
 	*x = (char)getc(sc->in); sc->columno++;
@@ -189,7 +189,7 @@ top:
 }
 
 void
-scan_expect(struct scan_st *sc, char *x)
+scan_expect(struct scan_st *sc, const char *x)
 {
 	if (!strcmp(sc->token, x)) {
 		scan(sc);

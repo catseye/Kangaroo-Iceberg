@@ -31,8 +31,8 @@ struct scan_st {
 
 extern struct scan_st *scan_open(char *);
 extern void scan_close(struct scan_st *);
-extern void scan_error(struct scan_st *, char *, ...);
+extern void scan_error(struct scan_st *, const char *, ...);
 extern void scan(struct scan_st *);
-extern void scan_expect(struct scan_st *, char *);
+extern void scan_expect(struct scan_st *, const char *);
 
 #endif /* !__SCAN_H */
