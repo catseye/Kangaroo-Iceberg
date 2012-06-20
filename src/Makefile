@@ -2,12 +2,10 @@
 # $Id$
 
 CC=	gcc
-CFLAGS=	-Wall
+CFLAGS=	-Wall -ansi -pedantic
 LIBS=	
 
-.ifdef DEBUG
-CFLAGS+= -g
-.endif
+CFLAGS+= ${EXTRA_CFLAGS}
 
 OBJS=	graph.o rule.o \
 	symbol.o \

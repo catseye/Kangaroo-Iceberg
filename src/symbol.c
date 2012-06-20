@@ -74,7 +74,7 @@ symbol_define(struct symbol_table *stab, char *token, int type)
 
 	MALLOC(new_sym, symbol, "symbol");
 	if ((new_sym->token = strdup(token)) == NULL)
-		errx(1, "Could not allocate symbol lexeme");
+		perror("Could not allocate symbol lexeme");
 	new_sym->type = type;
 	new_sym->dest = NULL;
 	new_sym->next = stab->head;

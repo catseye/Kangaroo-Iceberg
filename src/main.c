@@ -39,7 +39,7 @@
  */
 
 #include <stdio.h>
-#include <sysexits.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "scan.h"
@@ -111,12 +111,12 @@ main(int argc, char **argv)
 	}
 
 	/* symbol_table_free(gstab); */
-	exit(EX_OK);
+	exit(0);
 }
 
 void
 usage(void)
 {
 	fprintf(stderr, "usage: kiceberg [-d] srcfile ...\n");
-	exit(EX_USAGE);
+	exit(1);
 }
