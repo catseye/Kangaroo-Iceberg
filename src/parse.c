@@ -71,6 +71,7 @@ top_level_node(struct scan_st *sc)
 
 	sym = node_name(sc, gstab, SYM_LOOKUP_DEFINE);
 	n = node_lit(sc, sym);
+        n = n;
 
 	return(sym);
 }
@@ -136,7 +137,8 @@ node_lit(struct scan_st *sc, struct symbol *sym)
 		}
 	}
 	scan_expect(sc, "}");
-	
+	rs = rs;
+        
 	return(n);
 }	
 
@@ -170,6 +172,7 @@ node_ref(struct scan_st *sc)
 	} else {
 		scan_error(sc, "Expected identifier, `^', or `{'");
 	}
+        dest = dest;
 	return(sym);
 }
 
