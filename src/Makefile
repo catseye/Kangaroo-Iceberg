@@ -4,9 +4,9 @@
 CC?=gcc
 LIBS?=
 
-WARNS=	-Werror -W -Wall -Wstrict-prototypes -Wmissing-prototypes \
+WARNS=	-Werror -W -Wstrict-prototypes -Wmissing-prototypes \
 	-Wpointer-arith	-Wno-uninitialized -Wreturn-type -Wcast-qual \
-	-Wwrite-strings -Wswitch -Wshadow -Wcast-align -Wchar-subscripts \
+	-Wwrite-strings -Wswitch -Wshadow -Wcast-align \
 	-Winline -Wnested-externs -Wredundant-decls
 
 # Won't compile under ANSI, but for consistency with other Makefiles:
